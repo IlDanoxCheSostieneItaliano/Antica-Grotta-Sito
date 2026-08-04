@@ -182,13 +182,13 @@ const Reviews = () => {
         </motion.div>
 
         {/* Draggable Carousel */}
-        <div ref={carouselRef} className="relative w-full overflow-hidden flex z-10 py-4">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-grotta-dark to-transparent z-20 pointer-events-none"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
+        <div ref={carouselRef} className="relative w-full overflow-hidden flex z-10 py-4 items-stretch">
+          <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-grotta-dark to-transparent z-20 pointer-events-none"></div>
+          <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
           
           <motion.div 
             ref={innerRef}
-            className="flex gap-6 px-8 cursor-grab active:cursor-grabbing w-max"
+            className="flex gap-6 px-4 md:px-8 cursor-grab active:cursor-grabbing w-max items-stretch"
             drag="x"
             dragConstraints={carouselRef}
             style={{ x }}
@@ -203,7 +203,7 @@ const Reviews = () => {
             {reviewsData.map((review, idx) => (
               <div 
                 key={idx}
-                className="w-[320px] shrink-0 glass-panel p-8 flex flex-col justify-between select-none"
+                className="w-[280px] md:w-[320px] shrink-0 glass-panel p-6 md:p-8 flex flex-col justify-between select-none h-auto"
               >
                 <div>
                   <div className="flex gap-1 mb-6">
@@ -211,11 +211,11 @@ const Reviews = () => {
                       <Star key={i} size={18} className="fill-ocra text-ocra" />
                     ))}
                   </div>
-                  <p className="font-display italic text-xl leading-relaxed text-grotta-light/90 mb-6">
+                  <p className="font-display italic text-lg md:text-xl leading-relaxed text-grotta-light/90 mb-6">
                     "{review.text}"
                   </p>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-4 mt-auto">
                   <div className="w-10 h-10 rounded-full bg-tufo/20 flex items-center justify-center text-tufo font-display text-xl">
                     {review.name.charAt(0)}
                   </div>
