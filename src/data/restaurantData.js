@@ -54,11 +54,11 @@ export const menuData = [
 ];
 
 export const reviewsData = [
-  { name: "Marco R.", date: "Luglio 2026", rating: 5, text: "Un'esperienza fantastica a Lanuvio. I tonnarelli cacio e pepe sono superlativi." },
-  { name: "Laura B.", date: "Giugno 2026", rating: 5, text: "Locale molto accogliente. L'abbacchio era tenerissimo e saporito. Prezzi giusti per la qualità." },
-  { name: "Giuseppe V.", date: "Maggio 2026", rating: 4, text: "Ottima trattoria romana. Materie prime di qualità e porzioni generose." },
-  { name: "Francesca N.", date: "Aprile 2026", rating: 5, text: "La vera carbonara nel cuore dei Castelli Romani. Assolutamente da provare." },
-  { name: "Alessandro", date: "Marzo 2026", rating: 5, text: "Servizio impeccabile e atmosfera rustica autentica. Torneremo sicuramente." }
+  { name: "Sonia S", date: "Novembre 2022", rating: 5, text: "Sono stata in questo locale per la cena di compleanno di un amico, mi sono trovata molto bene, veramente piacevole cenare in una grotta posta alcuni metri sottoterra, ambiente molto accogliente e particolare, ottima cucina casalinga a prezzi ragionevoli." },
+  { name: "Carlo Z", date: "Novembre 2022", rating: 5, text: "Locale molto accogliente e piacevole. Personale allegro ed ottima cucina romana per trascorrere una bella serata in un borgo dei Castelli Romani." },
+  { name: "fabrizio s", date: "Novembre 2022", rating: 5, text: "Sono stato in questo locale per una cena con degli amici della MTB, mi sono trovato molto bene, veramente piacevole cenare in una grotta curata nei minimi particolari posta alcuni metri sottoterra, ambiente molto accogliente e particolare, ottima cucina romana a prezzi ragionevoli." },
+  { name: "Toty68", date: "Aprile 2023", rating: 5, text: "Arrivati per pranzo, siamo stati accolti da Alessandro che ci ha immediatamente messi a nostro agio, facendoci accomodare nella grotta. Abbiamo preso un menù pasta e uno di carne, veramente buona. Il tagliere misto come antipasto era abbondante e di buona qualità. Ci torneremo sicuramente." },
+  { name: "marcello p", date: "Novembre 2022", rating: 5, text: "Il locale si sviluppa all'interno di una grotta con un'atmosfera particolarmente calda, ideale per cene romantiche o tra amici, si mangia autentica cucina romanesca, molto abbondante l'antipasto. Ideale anche solo per stuzzicare qualcosa come aperitivo o per un drink dopocena." }
 ];
 
 const base = import.meta.env.BASE_URL;
