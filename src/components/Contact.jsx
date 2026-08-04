@@ -8,12 +8,20 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setFormStatus('submitting');
-    // Simulate network request
-    setTimeout(() => {
-      setFormStatus('success');
-      setTimeout(() => setFormStatus('idle'), 5000); // Reset after 5s
-    }, 1500);
+    const formData = new FormData(e.target);
+    const name = formData.get('name');
+    const phone = formData.get('phone');
+    const date = formData.get('date');
+    const people = formData.get('people');
+    const notes = formData.get('notes');
+
+    const message = `Salve, vorrei prenotare un tavolo all'Antica Grotta.\n\n👤 Nome: ${name}\n📞 Telefono: ${phone}\n📅 Data: ${date}\n👥 Persone: ${people}${notes ? `\n📝 Note: ${notes}` : ''}`;
+    
+    // Il numero a cui inviare (senza +). Inserisci quello del proprietario
+    const targetPhone = "39069373254"; 
+    const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
+    
+    window.open(whatsappUrl, '_blank');
   };
 
   return (
@@ -78,72 +86,48 @@ const Contact = () => {
           >
             <h3 className="font-display text-3xl text-ocra mb-8">Prenota un Tavolo</h3>
             
-            <AnimatePresence mode="wait">
-              {formStatus === 'success' ? (
-                <motion.div 
-                  key="success"
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  className="absolute inset-0 flex flex-col items-center justify-center text-center p-8 bg-grotta-dark/90 rounded-2xl z-20"
-                >
-                  <div className="w-16 h-16 rounded-full bg-oliva/20 flex items-center justify-center mb-6">
-                    <Send className="text-oliva" size={32} />
-                  </div>
-                  <h4 className="font-display text-3xl text-tufo mb-2">Richiesta Inviata</h4>
-                  <p className="font-sans font-light text-grotta-light/70">
-                    Ti contatteremo al più presto per confermare la tua prenotazione.
-                  </p>
-                </motion.div>
-              ) : (
-                <motion.form 
-                  key="form"
-                  onSubmit={handleSubmit} 
-                  className="space-y-6"
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                >
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Nome</label>
-                      <input required type="text" id="name" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white" />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="phone" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Telefono</label>
-                      <input required type="tel" id="phone" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white" />
-                    </div>
-                  </div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label htmlFor="date" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Data</label>
-                      <input required type="date" id="date" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white color-scheme-dark" style={{ colorScheme: "dark" }} />
-                    </div>
-                    <div className="space-y-2">
-                      <label htmlFor="people" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Persone</label>
-                      <select required id="people" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white appearance-none">
-                        {[1,2,3,4,5,6,7,8,9,10, '10+'].map(n => (
-                          <option key={n} value={n} className="bg-grotta-dark">{n}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
+            <motion.form 
+              onSubmit={handleSubmit} 
+              className="space-y-6"
+            >
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label htmlFor="name" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Nome</label>
+                  <input required name="name" type="text" id="name" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white" />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="phone" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Telefono</label>
+                  <input required name="phone" type="tel" id="phone" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white" />
+                </div>
+              </div>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="space-y-2">
+                  <label htmlFor="date" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Data</label>
+                  <input required name="date" type="date" id="date" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white color-scheme-dark" style={{ colorScheme: "dark" }} />
+                </div>
+                <div className="space-y-2">
+                  <label htmlFor="people" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Persone</label>
+                  <select required name="people" id="people" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white appearance-none">
+                    {[1,2,3,4,5,6,7,8,9,10, '10+'].map(n => (
+                      <option key={n} value={n} className="bg-grotta-dark">{n}</option>
+                    ))}
+                  </select>
+                </div>
+              </div>
 
-                  <div className="space-y-2">
-                    <label htmlFor="notes" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Note (Opzionale)</label>
-                    <textarea id="notes" rows="3" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white resize-none"></textarea>
-                  </div>
+              <div className="space-y-2">
+                <label htmlFor="notes" className="text-sm font-light text-tufo/80 uppercase tracking-widest">Note (Opzionale)</label>
+                <textarea name="notes" id="notes" rows="3" className="w-full bg-white/5 border border-white/10 rounded-none px-4 py-3 focus:outline-none focus:border-ocra/50 transition-colors font-sans text-white resize-none"></textarea>
+              </div>
 
-                  <button 
-                    type="submit" 
-                    disabled={formStatus === 'submitting'}
-                    className="w-full bg-tufo hover:bg-ocra text-grotta-dark font-medium uppercase tracking-widest py-4 transition-colors duration-300 flex items-center justify-center gap-2"
-                  >
-                    {formStatus === 'submitting' ? 'Invio in corso...' : 'Richiedi Prenotazione'}
-                  </button>
-                </motion.form>
-              )}
-            </AnimatePresence>
+              <button 
+                type="submit" 
+                className="w-full bg-tufo hover:bg-ocra text-grotta-dark font-medium uppercase tracking-widest py-4 transition-colors duration-300 flex items-center justify-center gap-2"
+              >
+                Invia su WhatsApp <Send size={18} />
+              </button>
+            </motion.form>
           </motion.div>
 
         </div>

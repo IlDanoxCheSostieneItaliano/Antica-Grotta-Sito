@@ -5,12 +5,15 @@ import Gallery from './components/Gallery';
 import Reviews from './components/Reviews';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
+import Navbar from './components/Navbar';
 
 function App() {
   return (
     <div className="relative w-full bg-stone-texture bg-repeat min-h-screen">
+      {/* Background Overlay */}
       <div className="fixed inset-0 bg-grotta-dark/95 z-[-1]"></div>
       
+      <Navbar />
       <Hero />
       <Menu />
       <Gallery />
