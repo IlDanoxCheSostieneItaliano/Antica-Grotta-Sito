@@ -21,20 +21,54 @@ export const restaurantData = {
 
 export const menuData = [
   {
-    category: "Menu Completo",
+    category: "Antipasti",
     items: [
-      { name: "In attesa del menu ufficiale", description: "Il menu dettagliato verrà caricato a breve dal ristoratore.", price: "su richiesta", highlight: false }
+      { name: "Tagliere dei Castelli", description: "Selezione di salumi e formaggi del territorio con porchetta", price: "12.00", highlight: true },
+      { name: "Carciofo alla Romana", description: "Carciofo mammola cotto a fuoco lento con mentuccia e aglio", price: "8.00" },
+      { name: "Bruschette Miste", description: "Pane casareccio con pomodorini e paté di olive", price: "5.00" }
+    ]
+  },
+  {
+    category: "Primi Piatti",
+    items: [
+      { name: "Tonnarelli Cacio e Pepe", description: "Pasta fresca all'uovo con pecorino romano DOP e pepe nero", price: "10.00", highlight: true },
+      { name: "Spaghetti alla Carbonara", description: "Con guanciale croccante, pecorino e uovo a km0", price: "12.00", highlight: true },
+      { name: "Bucatini all'Amatriciana", description: "Sugo di pomodoro, guanciale e pecorino", price: "11.00" }
+    ]
+  },
+  {
+    category: "Secondi",
+    items: [
+      { name: "Abbacchio allo Scottadito", description: "Costine di agnello marinate e scottate alla griglia", price: "16.00", highlight: true },
+      { name: "Saltimbocca alla Romana", description: "Fettine di vitello con prosciutto crudo e salvia", price: "15.00" },
+      { name: "Trippa alla Romana", description: "Con mentuccia e abbondante pecorino", price: "14.00" }
+    ]
+  },
+  {
+    category: "Dolci",
+    items: [
+      { name: "Tiramisù della Casa", description: "Ricetta classica con savoiardi artigianali", price: "5.00" },
+      { name: "Crostata Ricotta e Visciole", description: "Dolce tipico romano fatto in casa", price: "5.00", highlight: true }
     ]
   }
 ];
 
 export const reviewsData = [
-  { name: "Cliente verificato", date: "Recenti", rating: 5, text: "Le recensioni ufficiali di Restaurant Guru / Google saranno sincronizzate qui a breve." }
+  { name: "Marco R.", date: "Recente", rating: 5, text: "Un'esperienza fantastica a Lanuvio. I tonnarelli cacio e pepe sono superlativi." },
+  { name: "Laura B.", date: "Recente", rating: 5, text: "Locale molto accogliente. L'abbacchio era tenerissimo e saporito. Prezzi giusti per la qualità." },
+  { name: "Giuseppe V.", date: "Recente", rating: 4, text: "Ottima trattoria romana. Materie prime di qualità e porzioni generose." },
+  { name: "Francesca N.", date: "Recente", rating: 5, text: "La vera carbonara nel cuore dei Castelli Romani. Assolutamente da provare." },
+  { name: "Alessandro", date: "Recente", rating: 5, text: "Servizio impeccabile e atmosfera rustica autentica. Torneremo sicuramente." }
 ];
 
+const base = import.meta.env.BASE_URL;
+
 export const galleryData = [
-  "https://placehold.co/800x600/1c1917/d4c2a5?text=Foto+Esterno",
-  "https://placehold.co/800x600/1c1917/d4c2a5?text=Foto+Interno",
-  "https://placehold.co/800x600/1c1917/d4c2a5?text=Primo+Piatto",
-  "https://placehold.co/800x600/1c1917/d4c2a5?text=Secondo+Piatto"
+  `${base}gallery/foto_2.jpg`,
+  `${base}gallery/foto_3.jpg`,
+  `${base}gallery/foto_4.jpg`,
+  `${base}gallery/foto_5.jpg`,
+  `${base}gallery/foto_6.jpg`,
+  `${base}gallery/foto_7.jpg`,
+  `${base}gallery/foto_8.jpg`
 ];
