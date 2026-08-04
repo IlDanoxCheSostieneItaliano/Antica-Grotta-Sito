@@ -15,9 +15,9 @@ const Hero = () => {
       >
         <div className="absolute inset-0 bg-gradient-to-b from-grotta-dark/80 via-grotta-dark/60 to-grotta-dark z-10"></div>
         <img 
-          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?q=80&w=2070&auto=format&fit=crop" 
+          src="https://placehold.co/2070x1080/1c1917/d4c2a5?text=Foto+Copertina+Grotta" 
           alt="Interno Antica Grotta" 
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-50"
         />
       </motion.div>
 
