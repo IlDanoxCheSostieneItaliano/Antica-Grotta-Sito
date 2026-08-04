@@ -21,6 +21,15 @@ export const restaurantData = {
 
 export const menuData = [
   {
+    category: "Menù Fissi",
+    items: [
+      { name: "Assaggi della Grotta", description: "Selezione speciale di assaggi", price: "15.00" },
+      { name: "Assaggi e Primo", description: "Assaggi della grotta + un primo piatto", price: "20.00" },
+      { name: "Assaggi e Secondo", description: "Assaggi della grotta + un secondo piatto", price: "25.00" },
+      { name: "Menù Completo", description: "Assaggi, primo e secondo piatto", price: "30.00", highlight: true }
+    ]
+  },
+  {
     category: "Antipasti",
     items: [
       { name: "Tagliere dei Castelli", description: "Selezione di salumi e formaggi del territorio con porchetta", price: "12.00", highlight: true },
