@@ -162,17 +162,17 @@ const Reviews = () => {
           <div className="flex flex-wrap justify-center gap-4 mb-8">
             <Badge 
               platform="Google" 
-              score={4.8} 
+              score={4.0} 
               maxScore={5} 
-              reviewsCount={124} 
+              reviewsCount={29} 
               logo={<GoogleLogo />} 
               link="https://google.com/maps/search/Antica+Grotta+Lanuvio"
             />
             <Badge 
-              platform="TripAdvisor" 
-              score={4.5} 
+              platform="Trip" 
+              score={4.2} 
               maxScore={5} 
-              reviewsCount={87} 
+              reviewsCount={14} 
               logo={<TripLogo />} 
               link="https://www.tripadvisor.it/"
             />

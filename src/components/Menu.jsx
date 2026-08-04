@@ -21,12 +21,12 @@ const Menu = () => {
 
       <div className="flex flex-col md:flex-row gap-12">
         {/* Categories Tab */}
-        <div className="md:w-1/3 flex flex-row md:flex-col overflow-x-auto no-scrollbar border-b md:border-b-0 md:border-l border-white/10 pb-4 md:pb-0 hide-scrollbar">
+        <div className="md:w-1/3 flex flex-row md:flex-col overflow-x-auto justify-start sm:justify-center md:justify-start no-scrollbar border-b md:border-b-0 md:border-l border-white/10 pb-4 md:pb-0 hide-scrollbar">
           {menuData.map((category, idx) => (
             <button
               key={idx}
               onClick={() => setActiveCategory(idx)}
-              className={`text-left px-6 py-4 font-display text-2xl transition-all duration-300 relative whitespace-nowrap md:whitespace-normal ${
+              className={`text-center md:text-left px-4 md:px-6 py-4 font-display text-xl md:text-2xl transition-all duration-300 relative whitespace-nowrap md:whitespace-normal flex-1 md:flex-none min-w-[140px] md:min-w-0 ${
                 activeCategory === idx ? 'text-ocra' : 'text-grotta-light/50 hover:text-tufo'
               }`}
             >
