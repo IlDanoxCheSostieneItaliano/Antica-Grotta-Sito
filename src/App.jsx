@@ -7,6 +7,7 @@ import Reviews from './components/Reviews';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import Navbar from './components/Navbar';
+import CookieBanner from './components/CookieBanner';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
       <Reviews />
       <Contact />
       <Footer />
+      <CookieBanner />
     </div>
   );
 }

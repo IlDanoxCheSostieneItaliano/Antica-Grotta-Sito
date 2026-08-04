@@ -1,7 +1,10 @@
 export const restaurantData = {
   name: "Antica Grotta",
+  legalName: "Ristorante Antica Grotta S.r.l. (Da Aggiornare)",
+  pIva: "00000000000 (Da Aggiornare)",
   subtitle: "Cucina tradizionale nel cuore di Lanuvio",
   address: "Via Antonio Gramsci, 128, 00075 Lanuvio RM",
+  legalAddress: "Via Antonio Gramsci, 128, 00075 Lanuvio RM",
   phone: "+39 380 498 9335",
   email: "info@anticagrottalanuvio.it",
   hours: {

@@ -21,10 +21,16 @@ const Footer = () => {
           )}
         </div>
 
-        <p className="font-sans text-xs text-white/30 font-light">
-          &copy; {new Date().getFullYear()} {restaurantData.name}. Tutti i diritti riservati.<br />
-          Sito web realizzato per Ristorante Antica Grotta, Lanuvio.
-        </p>
+        <div className="font-sans text-xs text-white/40 font-light space-y-2">
+          <p>
+            &copy; {new Date().getFullYear()} {restaurantData.legalName || restaurantData.name}. Tutti i diritti riservati.<br />
+            Sede Legale: {restaurantData.legalAddress || restaurantData.address} | P.IVA: {restaurantData.pIva}
+          </p>
+          <div className="flex justify-center gap-4 mt-4">
+            <a href="#" className="hover:text-white transition-colors uppercase tracking-wider">Privacy Policy</a>
+            <a href="#" className="hover:text-white transition-colors uppercase tracking-wider">Cookie Policy</a>
+          </div>
+        </div>
       </div>
     </footer>
   );
