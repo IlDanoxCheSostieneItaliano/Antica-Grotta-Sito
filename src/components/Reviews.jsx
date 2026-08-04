@@ -1,16 +1,10 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { reviewsData } from '../data/restaurantData';
 import { Star, Users } from 'lucide-react';
 
 const Reviews = () => {
   const containerRef = useRef(null);
-  const carouselRef = useRef(null);
-  const innerRef = useRef(null);
-  
-  const x = useMotionValue(0);
-  const [isInteracting, setIsInteracting] = useState(false);
-  const interactTimeout = useRef(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -19,68 +13,6 @@ const Reviews = () => {
 
   // Parallax subtle effect for background elements
   const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
-
-  const setInteraction = (value) => {
-    if (value) {
-      setIsInteracting(true);
-      if (interactTimeout.current) clearTimeout(interactTimeout.current);
-    } else {
-      interactTimeout.current = setTimeout(() => setIsInteracting(false), 3000);
-    }
-  };
-
-  useEffect(() => {
-    if (isInteracting) return;
-
-    let timeoutId;
-    let isActive = true;
-    let animation;
-
-    const startScroll = () => {
-      if (!isActive || !carouselRef.current || !innerRef.current) return;
-      const carouselWidth = carouselRef.current.offsetWidth;
-      const innerWidth = innerRef.current.scrollWidth;
-      const maxScroll = -(innerWidth - carouselWidth); 
-      
-      if (maxScroll >= 0) return;
-
-      const currentX = x.get();
-      
-      if (currentX <= maxScroll + 10) {
-        timeoutId = setTimeout(() => {
-          if (isActive) {
-            import('framer-motion').then(({ animate }) => {
-              animation = animate(x, 0, { duration: 1, ease: "easeInOut", onComplete: () => {
-                if (isActive) startScroll();
-              }});
-            });
-          }
-        }, 1000);
-        return;
-      }
-
-      const distance = currentX - maxScroll; 
-      const duration = distance / 40; // speed
-
-      timeoutId = setTimeout(() => {
-        if (isActive) {
-           import('framer-motion').then(({ animate }) => {
-              animation = animate(x, maxScroll, { duration, ease: "linear", onComplete: () => {
-                 if (isActive) startScroll();
-              }});
-           });
-        }
-      }, 1000);
-    };
-
-    startScroll();
-
-    return () => {
-      isActive = false;
-      clearTimeout(timeoutId);
-      if (animation) animation.stop();
-    };
-  }, [isInteracting, x]);
 
   const GoogleLogo = () => (
     <svg viewBox="0 0 24 24" width="22" height="22" xmlns="http://www.w3.org/2000/svg">
@@ -181,29 +113,16 @@ const Reviews = () => {
           <div className="w-24 h-[1px] bg-tufo/30 mx-auto mt-4"></div>
         </motion.div>
 
-        {/* Draggable Carousel */}
-        <div ref={carouselRef} className="relative w-full overflow-hidden flex z-10 py-4 items-stretch">
-          <div className="hidden md:block absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-grotta-dark to-transparent z-20 pointer-events-none"></div>
-          <div className="hidden md:block absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
+        {/* Native Horizontal Scroll Carousel */}
+        <div className="relative w-full z-10">
+          <div className="hidden md:block absolute left-0 top-0 bottom-0 w-32 bg-gradient-to-r from-grotta-dark to-transparent z-20 pointer-events-none"></div>
+          <div className="hidden md:block absolute right-0 top-0 bottom-0 w-32 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
           
-          <motion.div 
-            ref={innerRef}
-            className="flex gap-6 px-4 md:px-8 cursor-grab active:cursor-grabbing w-max items-stretch"
-            drag="x"
-            dragConstraints={carouselRef}
-            style={{ x }}
-            onDragStart={() => setInteraction(true)}
-            onDragEnd={() => setInteraction(false)}
-            onMouseEnter={() => setInteraction(true)}
-            onMouseLeave={() => setInteraction(false)}
-            onTouchStart={() => setInteraction(true)}
-            onTouchEnd={() => setInteraction(false)}
-            dragElastic={0.1}
-          >
+          <div className="flex gap-6 px-4 md:px-8 py-4 overflow-x-auto snap-x snap-mandatory hide-scrollbar">
             {reviewsData.map((review, idx) => (
               <div 
                 key={idx}
-                className="w-[280px] md:w-[320px] shrink-0 glass-panel p-6 md:p-8 flex flex-col justify-between select-none h-auto"
+                className="snap-center w-[280px] md:w-[320px] shrink-0 glass-panel p-6 md:p-8 flex flex-col justify-between"
               >
                 <div>
                   <div className="flex gap-1 mb-6">
@@ -211,12 +130,12 @@ const Reviews = () => {
                       <Star key={i} size={18} className="fill-ocra text-ocra" />
                     ))}
                   </div>
-                  <p className="font-display italic text-lg md:text-xl leading-relaxed text-grotta-light/90 mb-6">
+                  <p className="font-display italic text-lg md:text-xl leading-relaxed text-grotta-light/90 mb-6 line-clamp-5">
                     "{review.text}"
                   </p>
                 </div>
                 <div className="flex items-center gap-4 mt-auto">
-                  <div className="w-10 h-10 rounded-full bg-tufo/20 flex items-center justify-center text-tufo font-display text-xl">
+                  <div className="w-10 h-10 rounded-full bg-tufo/20 flex items-center justify-center text-tufo font-display text-xl shrink-0">
                     {review.name.charAt(0)}
                   </div>
                   <div>
@@ -226,7 +145,7 @@ const Reviews = () => {
                 </div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
