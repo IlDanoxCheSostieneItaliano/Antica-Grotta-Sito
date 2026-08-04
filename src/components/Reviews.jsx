@@ -106,7 +106,7 @@ const Reviews = () => {
               maxScore={5} 
               reviewsCount={14} 
               logo={<TripLogo />} 
-              link="https://www.tripadvisor.it/"
+              link="https://www.tripadvisor.it/Restaurant_Review-g794658-d25150906-Reviews-Antica_Grotta-Lanuvio_Province_of_Rome_Lazio.html"
             />
           </div>
 
