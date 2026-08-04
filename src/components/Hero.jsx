@@ -24,7 +24,7 @@ const Hero = () => {
       {/* Content */}
       <div className="relative z-20 text-center px-4 max-w-4xl mx-auto">
         <motion.h1 
-          className="font-display text-6xl md:text-8xl lg:text-9xl mb-6 text-gradient font-bold tracking-tight"
+          className="font-display text-5xl sm:text-6xl md:text-8xl lg:text-9xl mb-6 text-gradient font-bold tracking-tight"
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.5, ease: "easeOut" }}
@@ -33,7 +33,7 @@ const Hero = () => {
         </motion.h1>
         
         <motion.p 
-          className="font-sans text-xl md:text-2xl text-grotta-light/90 uppercase tracking-widest font-light"
+          className="font-sans text-lg sm:text-xl md:text-2xl text-grotta-light/90 uppercase tracking-widest font-light"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1.2 }}

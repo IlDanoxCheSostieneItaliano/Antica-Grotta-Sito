@@ -15,7 +15,7 @@ const Menu = () => {
         transition={{ duration: 0.8 }}
         className="text-center mb-16"
       >
-        <h2 className="font-display text-5xl md:text-6xl text-ocra mb-4">Il Nostro Menu</h2>
+        <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-ocra mb-4">Il Nostro Menu</h2>
         <div className="w-24 h-[1px] bg-tufo/30 mx-auto"></div>
       </motion.div>
 
@@ -59,13 +59,13 @@ const Menu = () => {
                   whileHover={{ x: 6 }}
                   transition={{ type: "spring", stiffness: 200, damping: 25 }}
                 >
-                  <div className="flex justify-between items-baseline mb-2">
-                    <h3 className="font-display text-2xl text-tufo flex items-center gap-3">
+                  <div className="flex justify-between items-end mb-2 w-full">
+                    <h3 className="font-display text-xl md:text-2xl text-tufo flex items-center gap-2 flex-wrap">
                       {item.name}
-                      {item.highlight && <Leaf size={16} className="text-oliva" />}
+                      {item.highlight && <Leaf size={16} className="text-oliva shrink-0" />}
                     </h3>
-                    <div className="flex-1 mx-4 border-b border-dotted border-tufo/20 relative top-[-6px]"></div>
-                    <span className="font-sans text-xl text-ocra">€{item.price}</span>
+                    <div className="flex-1 mx-2 md:mx-4 border-b border-dotted border-tufo/20 relative bottom-2 min-w-[20px] hidden sm:block"></div>
+                    <span className="font-sans text-lg md:text-xl text-ocra whitespace-nowrap pl-2">€{item.price}</span>
                   </div>
                   {item.description && (
                     <p className="font-sans text-grotta-light/60 text-sm font-light leading-relaxed max-w-[85%]">

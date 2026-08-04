@@ -5,6 +5,8 @@
 @layer base {
   body {
     @apply bg-grotta-dark text-grotta-light;
+    overflow-x: hidden;
+    width: 100%;
   }
 }
 

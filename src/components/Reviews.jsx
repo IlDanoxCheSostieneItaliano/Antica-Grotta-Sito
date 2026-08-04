@@ -1,10 +1,18 @@
-import React, { useRef } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import React, { useRef, useEffect, useState } from 'react';
+import { motion, useScroll, useTransform, useAnimation, useMotionValue } from 'framer-motion';
 import { reviewsData } from '../data/restaurantData';
 import { Star } from 'lucide-react';
 
 const Reviews = () => {
   const containerRef = useRef(null);
+  const carouselRef = useRef(null);
+  const innerRef = useRef(null);
+  
+  const controls = useAnimation();
+  const x = useMotionValue(0);
+  const [isInteracting, setIsInteracting] = useState(false);
+  const interactTimeout = useRef(null);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
@@ -13,7 +21,65 @@ const Reviews = () => {
   // Parallax subtle effect for background elements
   const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
-  const carouselRef = useRef(null);
+  const setInteraction = (value) => {
+    if (value) {
+      setIsInteracting(true);
+      if (interactTimeout.current) clearTimeout(interactTimeout.current);
+    } else {
+      interactTimeout.current = setTimeout(() => setIsInteracting(false), 3000);
+    }
+  };
+
+  useEffect(() => {
+    if (isInteracting) return;
+
+    let timeoutId;
+    let isActive = true;
+
+    const startScroll = () => {
+      if (!isActive || !carouselRef.current || !innerRef.current) return;
+      const carouselWidth = carouselRef.current.offsetWidth;
+      const innerWidth = innerRef.current.scrollWidth;
+      const maxScroll = -(innerWidth - carouselWidth); 
+      
+      if (maxScroll >= 0) return;
+
+      const currentX = x.get();
+      
+      if (currentX <= maxScroll + 10) {
+        timeoutId = setTimeout(() => {
+          if (isActive) {
+            controls.start({ x: 0, transition: { duration: 1, ease: "easeInOut" } }).then(() => {
+              if (isActive) startScroll();
+            });
+          }
+        }, 1000);
+        return;
+      }
+
+      const distance = currentX - maxScroll; 
+      const duration = distance / 40; // speed
+
+      timeoutId = setTimeout(() => {
+        if (isActive) {
+          controls.start({
+            x: maxScroll,
+            transition: { duration, ease: "linear" }
+          }).then(() => {
+            if (isActive) startScroll();
+          });
+        }
+      }, 1000);
+    };
+
+    startScroll();
+
+    return () => {
+      isActive = false;
+      clearTimeout(timeoutId);
+      controls.stop();
+    };
+  }, [isInteracting, controls, x]);
 
   return (
     <section ref={containerRef} className="py-24 relative overflow-hidden" id="reviews">
@@ -38,10 +104,18 @@ const Reviews = () => {
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
           
           <motion.div 
+            ref={innerRef}
             className="flex gap-6 px-8 cursor-grab active:cursor-grabbing w-max"
             drag="x"
             dragConstraints={carouselRef}
-            initial={{ x: 0 }}
+            style={{ x }}
+            animate={controls}
+            onDragStart={() => setInteraction(true)}
+            onDragEnd={() => setInteraction(false)}
+            onMouseEnter={() => setInteraction(true)}
+            onMouseLeave={() => setInteraction(false)}
+            onTouchStart={() => setInteraction(true)}
+            onTouchEnd={() => setInteraction(false)}
             dragElastic={0.1}
           >
             {reviewsData.map((review, idx) => (
