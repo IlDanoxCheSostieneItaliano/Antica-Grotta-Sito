@@ -2,7 +2,7 @@ export const restaurantData = {
   name: "Antica Grotta",
   subtitle: "Cucina tradizionale nel cuore di Lanuvio",
   address: "Via Antonio Gramsci, 128, 00075 Lanuvio RM",
-  phone: "+39 06 937 3254", // Fictional/placeholder phone for realistic look, usually requested or to be filled
+  phone: "+39 380 498 9335",
   email: "info@anticagrottalanuvio.it",
   hours: {
     Mon: "Chiuso",

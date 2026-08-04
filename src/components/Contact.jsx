@@ -18,7 +18,7 @@ const Contact = () => {
     const message = `Salve, vorrei prenotare un tavolo all'Antica Grotta.\n\n👤 Nome: ${name}\n📞 Telefono: ${phone}\n📅 Data: ${date}\n👥 Persone: ${people}${notes ? `\n📝 Note: ${notes}` : ''}`;
     
     // Il numero a cui inviare (senza +). Inserisci quello del proprietario
-    const targetPhone = "39069373254"; 
+    const targetPhone = "393804989335"; 
     const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(message)}`;
     
     window.open(whatsappUrl, '_blank');
