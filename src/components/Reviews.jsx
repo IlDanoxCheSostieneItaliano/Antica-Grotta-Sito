@@ -13,6 +13,8 @@ const Reviews = () => {
   // Parallax subtle effect for background elements
   const y = useTransform(scrollYProgress, [0, 1], ["-20%", "20%"]);
 
+  const carouselRef = useRef(null);
+
   return (
     <section ref={containerRef} className="py-24 relative overflow-hidden" id="reviews">
       <motion.div style={{ y }} className="absolute -left-[20vw] top-[10%] w-[50vw] h-[50vw] rounded-full bg-tufo/5 blur-[120px] pointer-events-none" />
@@ -31,14 +33,14 @@ const Reviews = () => {
         </motion.div>
 
         {/* Draggable Carousel */}
-        <div className="relative w-full overflow-hidden flex z-10 py-4">
+        <div ref={carouselRef} className="relative w-full overflow-hidden flex z-10 py-4">
           <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-grotta-dark to-transparent z-20 pointer-events-none"></div>
           <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
           
           <motion.div 
             className="flex gap-6 px-8 cursor-grab active:cursor-grabbing w-max"
             drag="x"
-            dragConstraints={{ right: 0, left: typeof window !== 'undefined' ? Math.min(0, -((320 + 24) * reviewsData.length - window.innerWidth + 48)) : 0 }}
+            dragConstraints={carouselRef}
             initial={{ x: 0 }}
             dragElastic={0.1}
           >
