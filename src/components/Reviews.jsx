@@ -38,7 +38,7 @@ const Reviews = () => {
           <motion.div 
             className="flex gap-6 px-8 cursor-grab active:cursor-grabbing w-max"
             drag="x"
-            dragConstraints={{ right: 0, left: -((320 + 24) * reviewsData.length - window.innerWidth + 48) }}
+            dragConstraints={{ right: 0, left: typeof window !== 'undefined' ? Math.min(0, -((320 + 24) * reviewsData.length - window.innerWidth + 48)) : 0 }}
             initial={{ x: 0 }}
             dragElastic={0.1}
           >
