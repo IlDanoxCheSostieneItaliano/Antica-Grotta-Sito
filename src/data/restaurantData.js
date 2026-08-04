@@ -54,11 +54,11 @@ export const menuData = [
 ];
 
 export const reviewsData = [
-  { name: "Marco R.", date: "Recente", rating: 5, text: "Un'esperienza fantastica a Lanuvio. I tonnarelli cacio e pepe sono superlativi." },
-  { name: "Laura B.", date: "Recente", rating: 5, text: "Locale molto accogliente. L'abbacchio era tenerissimo e saporito. Prezzi giusti per la qualità." },
-  { name: "Giuseppe V.", date: "Recente", rating: 4, text: "Ottima trattoria romana. Materie prime di qualità e porzioni generose." },
-  { name: "Francesca N.", date: "Recente", rating: 5, text: "La vera carbonara nel cuore dei Castelli Romani. Assolutamente da provare." },
-  { name: "Alessandro", date: "Recente", rating: 5, text: "Servizio impeccabile e atmosfera rustica autentica. Torneremo sicuramente." }
+  { name: "Marco R.", date: "Luglio 2026", rating: 5, text: "Un'esperienza fantastica a Lanuvio. I tonnarelli cacio e pepe sono superlativi." },
+  { name: "Laura B.", date: "Giugno 2026", rating: 5, text: "Locale molto accogliente. L'abbacchio era tenerissimo e saporito. Prezzi giusti per la qualità." },
+  { name: "Giuseppe V.", date: "Maggio 2026", rating: 4, text: "Ottima trattoria romana. Materie prime di qualità e porzioni generose." },
+  { name: "Francesca N.", date: "Aprile 2026", rating: 5, text: "La vera carbonara nel cuore dei Castelli Romani. Assolutamente da provare." },
+  { name: "Alessandro", date: "Marzo 2026", rating: 5, text: "Servizio impeccabile e atmosfera rustica autentica. Torneremo sicuramente." }
 ];
 
 const base = import.meta.env.BASE_URL;

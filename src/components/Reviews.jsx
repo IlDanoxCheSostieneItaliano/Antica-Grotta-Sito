@@ -30,28 +30,22 @@ const Reviews = () => {
           <div className="w-24 h-[1px] bg-tufo/30 mx-auto"></div>
         </motion.div>
 
-        {/* Infinite Carousel */}
-        <div className="relative w-full overflow-hidden flex z-10">
-          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-grotta-dark to-transparent z-10"></div>
-          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-10"></div>
+        {/* Draggable Carousel */}
+        <div className="relative w-full overflow-hidden flex z-10 py-4">
+          <div className="absolute left-0 top-0 bottom-0 w-24 bg-gradient-to-r from-grotta-dark to-transparent z-20 pointer-events-none"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-24 bg-gradient-to-l from-grotta-dark to-transparent z-20 pointer-events-none"></div>
           
           <motion.div 
-            className="flex gap-6 py-8 px-4 cursor-grab active:cursor-grabbing"
-            animate={{ x: [0, -1035 * 2] }}
-            transition={{ 
-              x: {
-                repeat: Infinity,
-                repeatType: "loop",
-                duration: 40,
-                ease: "linear",
-              },
-            }}
-            whileHover={{ animationPlayState: "paused" }} // Wait, Framer Motion doesn't support pause like this easily without custom hooks, but this works in CSS or via a simple setup. For simplicity, we'll keep it moving smoothly.
+            className="flex gap-6 px-8 cursor-grab active:cursor-grabbing w-max"
+            drag="x"
+            dragConstraints={{ right: 0, left: -((320 + 24) * reviewsData.length - window.innerWidth + 48) }}
+            initial={{ x: 0 }}
+            dragElastic={0.1}
           >
-            {[...reviewsData, ...reviewsData].map((review, idx) => (
+            {reviewsData.map((review, idx) => (
               <div 
                 key={idx}
-                className="w-[320px] shrink-0 glass-panel p-8 flex flex-col justify-between"
+                className="w-[320px] shrink-0 glass-panel p-8 flex flex-col justify-between select-none"
               >
                 <div>
                   <div className="flex gap-1 mb-6">
