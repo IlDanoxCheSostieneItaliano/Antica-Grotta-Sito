@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { motion, useScroll, useTransform, useAnimation, useMotionValue } from 'framer-motion';
+import { motion, useScroll, useTransform, useMotionValue } from 'framer-motion';
 import { reviewsData } from '../data/restaurantData';
 import { Star } from 'lucide-react';
 
@@ -8,7 +8,6 @@ const Reviews = () => {
   const carouselRef = useRef(null);
   const innerRef = useRef(null);
   
-  const controls = useAnimation();
   const x = useMotionValue(0);
   const [isInteracting, setIsInteracting] = useState(false);
   const interactTimeout = useRef(null);
@@ -35,6 +34,7 @@ const Reviews = () => {
 
     let timeoutId;
     let isActive = true;
+    let animation;
 
     const startScroll = () => {
       if (!isActive || !carouselRef.current || !innerRef.current) return;
@@ -49,8 +49,10 @@ const Reviews = () => {
       if (currentX <= maxScroll + 10) {
         timeoutId = setTimeout(() => {
           if (isActive) {
-            controls.start({ x: 0, transition: { duration: 1, ease: "easeInOut" } }).then(() => {
-              if (isActive) startScroll();
+            import('framer-motion').then(({ animate }) => {
+              animation = animate(x, 0, { duration: 1, ease: "easeInOut", onComplete: () => {
+                if (isActive) startScroll();
+              }});
             });
           }
         }, 1000);
@@ -62,12 +64,11 @@ const Reviews = () => {
 
       timeoutId = setTimeout(() => {
         if (isActive) {
-          controls.start({
-            x: maxScroll,
-            transition: { duration, ease: "linear" }
-          }).then(() => {
-            if (isActive) startScroll();
-          });
+           import('framer-motion').then(({ animate }) => {
+              animation = animate(x, maxScroll, { duration, ease: "linear", onComplete: () => {
+                 if (isActive) startScroll();
+              }});
+           });
         }
       }, 1000);
     };
@@ -77,9 +78,9 @@ const Reviews = () => {
     return () => {
       isActive = false;
       clearTimeout(timeoutId);
-      controls.stop();
+      if (animation) animation.stop();
     };
-  }, [isInteracting, controls, x]);
+  }, [isInteracting, x]);
 
   return (
     <section ref={containerRef} className="py-24 relative overflow-hidden" id="reviews">
@@ -109,7 +110,6 @@ const Reviews = () => {
             drag="x"
             dragConstraints={carouselRef}
             style={{ x }}
-            animate={controls}
             onDragStart={() => setInteraction(true)}
             onDragEnd={() => setInteraction(false)}
             onMouseEnter={() => setInteraction(true)}
